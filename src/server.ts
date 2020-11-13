@@ -1,0 +1,19 @@
+import 'reflect-metadata';
+import express from 'express';
+import routes from './routes';
+
+import './database';
+
+const app = express();
+
+app.use(express.json());
+app.use(routes);
+
+app.get('/', (request, response) => {
+    return response.json({ message: 'hello fucking world!!!' });
+});
+
+app.listen(3333, () => {
+    // eslint-disable-next-line no-console
+    console.log('server is running on port 3333!!!');
+});
