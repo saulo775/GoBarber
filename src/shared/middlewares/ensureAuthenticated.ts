@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { decode, verify } from 'jsonwebtoken';
-import configAuth from '../config/auth';
+import configAuth from '../../config/auth';
 
 import AppError from '../errors/AppError';
 
