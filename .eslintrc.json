@@ -23,6 +23,7 @@
     ],
     "rules": {
         "class-methods-use-this":"off",
+        "@typescript-eslint/interface-name-prefix": ["error", {"prefixWith" : "always"}],
         "import/extensions": [
             "error",
             "ignorePackages",
