@@ -23,11 +23,11 @@ class User {
     @Column()
     avatar: string;
 
-    // @UpdateDateColumn()
-    // updated_at: Date;
+    @UpdateDateColumn()
+    updated_at: Date;
 
-    // @CreateDateColumn()
-    // created_at: Date;
+    @CreateDateColumn()
+    created_at: Date;
 }
 
 export default User;

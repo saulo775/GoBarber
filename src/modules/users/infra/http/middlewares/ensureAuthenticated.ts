@@ -1,8 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
-import { decode, verify } from 'jsonwebtoken';
-import configAuth from '../../config/auth';
+import { verify } from 'jsonwebtoken';
 
-import AppError from '../errors/AppError';
+
+import configAuth from '@config/auth';
+
+import AppError from '@shared/errors/AppError';
 
 
 
