@@ -1,25 +1,36 @@
 import AppError from '@shared/errors/AppError';
 
 import FakeUsersRepository from '../repositories/fakes/fakeUsersRepository';
+import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
 import AuthenticateUserService from './AuthenticateUserService';
 import CreateUserService from './CreateUserService';
 
 describe('AuthenticateUser', () => {
     it('should be able authenticate', async () => {
-         const fakeUsersRepository = new FakeUsersRepository();
-         const createUser = new CreateUserService(fakeUsersRepository);
-         const authenticateUser = new AuthenticateUserService(fakeUsersRepository);
+        const fakeUsersRepository = new FakeUsersRepository();
+        const fakeHashProvider = new FakeHashProvider()
 
-         await createUser.execute({
-             name: 'Fulano',
-             email: 'Fulano@gmail.com',
-             password: '123456'
-         });
+        const createUser = new CreateUserService(
+            fakeUsersRepository,
+            fakeHashProvider
+        );
 
-         const response = await authenticateUser.execute({
-            email: 'Fulano@gmail.com',
+        const authenticateUser = new AuthenticateUserService(
+            fakeUsersRepository,
+            fakeHashProvider
+        );
+
+        const user =  await createUser.execute({
+            name: 'John Doe',
+            email: 'johndoe@example.com',
             password: '123456'
         });
-         expect(response).toHaveProperty('token');
+
+         const response = await authenticateUser.execute({
+            email: 'johndoe@example.com',
+            password: '123456'
+        });
+        expect(response).toHaveProperty('token');
+        expect(response.user).toEqual(user);
     });
  });
