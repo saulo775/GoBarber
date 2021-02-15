@@ -23,12 +23,12 @@ export default class CreateAppointment1606334154005 implements MigrationInterfac
                         type: 'timestamp with time zone',
                     },
                     {
-                        name: 'updated-at',
+                        name: 'updated_at',
                         type: 'timestamp',
                         default: 'now()',
                     },
                     {
-                        name: 'created-at',
+                        name: 'created_at',
                         type: 'timestamp',
                         default: 'now()',
                     },

@@ -24,12 +24,12 @@ export class CreateUserTokens1613395702888 implements MigrationInterface {
                     type: 'uuid',
                 },
                 {
-                    name: 'updated-at',
+                    name: 'updated_at',
                     type: 'timestamp',
                     default: 'now()',
                 },
                 {
-                    name: 'created-at',
+                    name: 'created_at',
                     type: 'timestamp',
                     default: 'now()',
                 },

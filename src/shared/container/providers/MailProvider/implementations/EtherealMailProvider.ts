@@ -11,6 +11,7 @@ export default class EtherealMailProvider implements IMailProvider {
     private client: Transporter;
 
     constructor () {
+        console.log("asd")
         nodemailer.createTestAccount().then(account => {
             const transporter = nodemailer.createTransport({
                 host: account.smtp.host,
@@ -21,6 +22,8 @@ export default class EtherealMailProvider implements IMailProvider {
                     pass: account.pass
                 }
             });
+
+            console.log(account);
             this.client = transporter;
         });
 
