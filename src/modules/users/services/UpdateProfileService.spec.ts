@@ -2,7 +2,7 @@ import AppError from '@shared/errors/AppError';
 
 import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
 import FakeUsersRepository from '../repositories/fakes/fakeUsersRepository';
-import UpdateProfileService from './UpdateProfileServise';
+import UpdateProfileService from './UpdateProfileService';
 
 
 let fakeUsersRepository: FakeUsersRepository;
@@ -22,23 +22,32 @@ describe('UpdateProfile', () => {
     })
 
 
-   it('should be able to update profile ', async () => {
+    it('should be able to update profile ', async () => {
 
-    const user = await fakeUsersRepository.create({
-        name: 'John Doe',
-        email: 'johndoe@example.com',
-        password: '123456'
-    })
+        const user = await fakeUsersRepository.create({
+            name: 'John Doe',
+            email: 'johndoe@example.com',
+            password: '123456'
+        })
 
-    const updatedUser = await updateProfile.execute({
-        user_id: user.id,
-        name: 'John Trê',
-        email: 'johntre@example.com',
+        const updatedUser = await updateProfile.execute({
+            user_id: user.id,
+            name: 'John Trê',
+            email: 'johntre@example.com',
+        });
+
+        expect(updatedUser.name).toBe('John Trê');
+        expect(updatedUser.email).toBe('johntre@example.com')
     });
 
-    expect(updatedUser.name).toBe('John Trê');
-    expect(updatedUser.email).toBe('johntre@example.com')
-   });
+    it('should not be able the profile profile from non-existing ', async () => {
+        expect(updateProfile.execute({
+            user_id: 'non-existing-user-id',
+            name: 'Test',
+            email: 'test@example.com',
+        })).rejects.toBeInstanceOf(AppError);
+
+    });
 
     it('should not be able to change to another user email', async () => {
 
@@ -114,7 +123,4 @@ describe('UpdateProfile', () => {
         })).rejects.toBeInstanceOf(AppError);
 
     });
-
-
-
 });
